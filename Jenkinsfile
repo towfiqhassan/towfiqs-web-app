@@ -7,16 +7,22 @@ pipeline {
             }
         }
         stage("Clone Repo"){
-    steps {
-        sh "git clone https://github.com/towfiqhassan/towfiqs-web-app.git"
-		dir("towfiqs-web-app") {
-        sh "date > output.txt"
-        }
-    }
+            steps {
+                sh "git clone https://github.com/towfiqhassan/towfiqs-web-app.git"
+                dir("towfiqs-web-app") {
+                sh "date > output.txt"
+                }
+            }
         }
         stage("Build"){
             steps {
                 echo "Build UP"
+                script {         
+                    def customImage = docker.build('cloudformula/simple-web-app', "./docker")
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    customImage.push("${env.BUILD_NUMBER}")
+                    }                     
+            }
             }
         }
         stage("Test"){
