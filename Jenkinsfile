@@ -9,10 +9,12 @@ pipeline {
         }
         stage("Clone Repo"){
             steps {
-               sh "git clone https://github.com/towfiqhassan/towfiqs-web-app.git"
-		       dir "towfiqs-web-app"
-               sh "date > output.txt"
+                sh "git clone https://github.com/towfiqhassan/towfiqs-web-app.git"
+		        dir("towfiqs-web-app") {
+                         sh "date > output.txt"
+		        }
             }
+        
         }
         stage("Build"){
             steps {
