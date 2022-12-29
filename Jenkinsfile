@@ -4,6 +4,7 @@ pipeline {
         stage("Clean Up"){
             steps {
                 echo "Clean UP"
+                deleteDir()
             }
         }
         stage("Clone Repo"){
