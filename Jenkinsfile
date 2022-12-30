@@ -11,14 +11,16 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "git clone https://github.com/towfiqhassan/towfiqs-web-app.git"
-                sh "ls -l"
+                dir("towfiqs-web-app.git"){
+                   sh "ls -l"
+                }
             }
         }
         stage("Build"){
             steps {
                 echo "Build UP"
                 script {         
-                    def customImage = docker.build('cloudformula/simple-web-app', "/docker")
+                    def customImage = docker.build('cloudformula/simple-web-app', "./docker")
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                     customImage.push("${env.BUILD_NUMBER}")
                     }                     
