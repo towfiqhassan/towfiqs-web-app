@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "git clone https://github.com/towfiqhassan/towfiqs-web-app.git"
-                dir("towfiqs-web-app.git"){
+                dir("towfiqs-web-app"){
                    sh "ls -l"
                    sh "pwd"
                 }
@@ -20,6 +20,7 @@ pipeline {
         stage("Build"){
             steps {
                 echo "Build UP"
+                dir("towfiqs-web-app")
                 sh "pwd"
                 script {         
                     def customImage = docker.build('cloudformula/simple-web-app', "./docker")
