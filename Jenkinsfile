@@ -9,7 +9,9 @@ pipeline {
         }
         stage("Clone Repo"){
             steps {
+                sh "pwd"
                 sh "git clone https://github.com/towfiqhassan/towfiqs-web-app.git"
+                sh "ls -l"
             }
         }
         stage("Build"){
