@@ -13,6 +13,7 @@ pipeline {
                 sh "git clone https://github.com/towfiqhassan/towfiqs-web-app.git"
                 dir("towfiqs-web-app"){
                    sh "ls -l"
+                   sh "cp index.html docker"
                    sh "pwd"
                 }
             }
