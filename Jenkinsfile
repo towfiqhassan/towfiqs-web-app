@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo "Build UP"
                 script {         
-                    def customImage = docker.build('cloudformula/simple-web-app', "docker")
+                    def customImage = docker.build('cloudformula/simple-web-app', "/docker")
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                     customImage.push("${env.BUILD_NUMBER}")
                     }                     
